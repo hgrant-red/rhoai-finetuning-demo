@@ -15,6 +15,7 @@ This project was inspired by and builds upon the foundational work from the Red 
 ## 🛠️ Prerequisites
 * **Platform:** Red Hat OpenShift AI 3.3
 * **Hardware:** Jupyter Workbench provisioned with at least 1x NVIDIA L40S GPU (or equivalent VRAM).
+*  **Image:** Use base image Jupyter | PyTorch | CUDA | Python 3.12 2025.2
 * **Storage:** Ensure your Cluster Storage (PVC) is increased to **40GB+**. Model checkpoints are large (~5-6GB each), and default 20GB volumes will encounter "No space left on device" errors if saving multiple epochs. 
 * **Dependencies:** `training-hub[cuda]` (installed dynamically via pip in Cell 1). *Note: The initial compile of `flash-attn` and `causal-conv1d` during the pip install may take 15-20 minutes depending on CPU allocation.*
 
@@ -42,3 +43,7 @@ To move beyond manual, monolithic scripts, this workflow should be transitioned 
 * **Registration:** Automatically push the finalized model and metadata into the OpenShift AI Model Registry for lineage tracking and serving.
 
 For a complete guide on building out these production-grade pipelines, check out the [kubeflow/pipelines-components repository](https://github.com/kubeflow/pipelines-components) and the RHOAI guided examples.
+
+**3. Create Custom Image**
+To ensure notebook is configured properly through different versions of Openshift AI we must save the training-hub and cuda dependecnies in a custom image.
+
