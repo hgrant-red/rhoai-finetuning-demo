@@ -1,1 +1,4 @@
 training-hub[cuda]
+lm-eval[api]
+langdetect
+immutabledict
